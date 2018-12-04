@@ -1,0 +1,86 @@
+<div class="page-container">
+	<!-- BEGIN SIDEBAR -->
+	<div class="page-sidebar-wrapper">		
+		<div class="page-sidebar navbar-collapse collapse">
+		 
+			<ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">				     			
+				
+	
+				
+				#foreach($menu in $leftmenu)
+				#if($menu.selected)
+				<li class="start active "> 
+				#else
+				<li class="start ">
+				#end
+			
+					<a href="javascript:;">
+						<i class="${menu.iconId}"></i>
+						<span class="title">${menu.name}<!-- °æ±¾¹ÜÀí --></span>
+						#if($menu.selected)
+				<span class="arrow  open"></span>
+				#else
+				<span class="arrow"></span>
+				#end
+						
+						
+					</a>
+					<ul class="sub-menu">
+					#foreach($child in $menu.children)
+					#if($child.selected)
+						<li class="active">
+						#else
+						<li>
+						#end
+							<a href="${rc.contextPath}${child.hrefUrl}">${child.name}</a>
+						</li>
+						#end
+						</ul>
+						</li>
+						#end							
+			</ul>			
+		</div>
+	</div>
+	<!-- END SIDEBAR -->
+	<!-- BEGIN CONTENT -->
+	<div class="page-content-wrapper">
+		<div class="page-content">	
+		<!-- BEGIN PAGE HEAD -->
+		<div class="page-head">
+			<!-- BEGIN PAGE TITLE -->
+			<div class="page-title">
+			   <h1>
+				#foreach($navi in $navigator.getItems())
+					#if($navi.last == true)
+						$navi.name
+					#end
+				#end
+			   </h1>
+		 </div>
+			<!-- END PAGE TITLE -->				
+		</div>
+		<!-- END PAGE HEAD -->
+		<!-- BEGIN PAGE BREADCRUMB -->
+		  
+			<ul class="page-breadcrumb breadcrumb">
+					#foreach($navi in $navigator.getItems())
+						#if(${navi.hrefUrl})
+							<li><a href="${rc.contextPath}${navi.hrefUrl}">$navi.name</a></li>
+						#else
+							<li class="active"><span>$navi.name</span></li>
+						#end
+						#if($navi.last == false)
+						    <i class="fa fa-angle-right"></i>
+						#end
+					#end
+			</ul>	
+					
+		<!-- END PAGE BREADCRUMB -->	
+		<!-- BEGIN PAGE CONTENT-->
+		 $screen_content
+		<!-- END PAGE CONTENT-->
+		</div>
+	 </div>
+	 <!-- END CONTENT -->
+	 
+</div>

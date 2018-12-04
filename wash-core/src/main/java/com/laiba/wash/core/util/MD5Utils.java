@@ -1,0 +1,45 @@
+package com.laiba.wash.core.util;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class MD5Utils {  
+  
+    /** 
+     * 32位MD5加密方法  
+     *  
+     * @param sSecret 
+     * @return 
+     */  
+    public static String getMd5Value(String sSecret) {  
+        try {  
+            MessageDigest bmd5 = MessageDigest.getInstance("MD5");  
+            bmd5.update(sSecret.getBytes());  
+            int i;  
+            StringBuffer buf = new StringBuffer();  
+            byte[] b = bmd5.digest();// 加密  
+            for (int offset = 0; offset < b.length; offset++) {  
+                i = b[offset];  
+                if (i < 0)  
+                    i += 256;  
+                if (i < 16)  
+                    buf.append("0");  
+                buf.append(Integer.toHexString(i));  
+            }  
+            return buf.toString();  
+        } catch (NoSuchAlgorithmException e) {  
+            e.printStackTrace();  
+        }  
+        return "";  
+    }  
+    
+    /**
+     * 16位MD5加密方法
+     * @param sSecret
+     * @return
+     */
+    public static String getMd5Valueby16(String sSecret){
+    	return getMd5Value(sSecret).substring(8, 24);
+    }
+    
+}  

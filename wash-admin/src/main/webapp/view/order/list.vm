@@ -1,0 +1,165 @@
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- BEGIN PROFILE SIDEBAR -->
+		<div class="profile-right-sidebar" style="width: 250px;">
+		</div>
+		<!-- END BEGIN PROFILE SIDEBAR -->
+		<!-- BEGIN PROFILE CONTENT -->
+		<div class="profile-content">
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PORTLET -->
+					<div class="portlet light ">
+						<!-- <div class="portlet-title">
+							<div class="actions">
+								<a href="${rc.contextPath}/commodity/add.htm"
+									class="btn btn-default btn-circle btn-primary"> <i
+									class="fa fa-plus"></i> <span class="hidden-480">新增商品</span>
+								</a>
+							</div>
+						</div> -->
+						<div class="portlet-body">
+
+							<div class="table-responsive">
+								<form method="post" name="frm">
+									<table class="table table-bordered table_sxcondition">
+										<tbody>
+											<tr>
+												<th width="12%">订单号</th>					
+												<td width="20%"><input type="text" class="form-control"
+													name="orderNo" value="$!orderNo">
+												</td>
+												<th width="12%">订单状态：</th>					
+												<td width="20%">
+												<select class="form-control" name="status" data-placeholder="请选择"  >
+														<option value="">请选择</option> 
+														
+														#if($status == 1)
+			 												<option selected="selected" value="1">等待买家付款</option>
+			 											#else
+			 												<option value="1">等待买家付款</option>
+														#end
+														
+												        #if($order.status == 2)
+			 												<option selected="selected" value="2">付款成功</option>
+			 											#else
+			 												<option value="2">付款成功</option>
+														#end
+															
+													     #if($order.status == 3)
+			 												<option selected="selected" value="3">商家确认订单</option>
+		 												#else
+		 													<option value="3">商家确认订单</option>
+														#end  
+														
+														#if($order.status == 4)
+			 												<option selected="selected" value="4">洗衣中</option>
+			 											#else
+		 													<option value="4">洗衣中</option>
+														#end
+														
+														#if($order.status == 5)
+			 												<option selected="selected" value="5">订单结束</option>
+			 											#else
+		 													<option value="5">订单结束</option>
+														#end
+												</select>
+												</td>
+												
+												<td colspan="2">
+													<button type="submit" class="btn btn-primary">
+														<i class="fa fa-search"></i> 查询
+													</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+
+							<!--BEGIN 查询结果-->
+							<div class="table-container">
+								#if ($pageInfo.result.size() == 0)
+								#parse("/control/noResult.vm") #else
+								<table class="table table-striped table-bordered table-hover"
+									id="operatorTable" aria-describedby="datatable_products_info"
+									role="grid">
+									<thead>
+										<tr role="row" class="heading">
+											<th width="10%">订单号</th>									
+											<th width="8%">订单状态</th>
+											<th width="7%">总金额</th>
+											<th width="8%">用户昵称</th>
+											<th width="15%">商品</th>
+											<th width="12%">地址</th>
+											<th width="12%">用户留言</th>
+											<th width="12%">商家留言</th>
+											<th width="10%">创建时间</th>
+											<th width="8%">操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										#foreach($order in $orderList)
+										<tr role="row"  >
+											<td>$order.orderNo</td>	
+											<td>
+											#if($order.status == -1)
+ 												<p>订单取消</p>
+											#end
+											#if($order.status == 1)
+ 												<p>等待买家付款</p>
+											#end
+									        #if($order.status == 2)
+ 												<p>付款成功</p>
+											#end	
+										     #if($order.status == 3)
+ 												<p>商家确认订单</p>
+											#end  
+											#if($order.status == 4)
+ 												<p>洗衣中</p>
+											#end
+											#if($order.status == 5)
+ 												<p>订单结束</p>
+											#end
+										        
+										        </td>	
+											<td>$order.money</td>	
+											<td>$order.user.wxName</td>
+											<td>
+											#foreach($commodity in $order.commodityList)
+											$commodity.name (￥ $commodity.price ) * $commodity.number<br>
+											#end
+											</td>
+											<td>$order.userAddress.name<br>
+											$order.userAddress.mobile<br>
+											$order.userAddress.address</td>
+											<td>$!order.comment</td>	
+											<td>$!order.merComment</td>	
+											<td>$!date.format('yyyy/MM/dd
+												HH:mm:ss',$order.createTime)</td>
+											<td>
+												<a class="btn btn-circle btn-icon-only btn-default tooltips "
+														href="#getRequestBase()/order/update.htm?id=${order.id}"
+														data-toggle="tooltip" data-placement="bottom" data-html="true"
+														data-original-title="修改" ><i class="fa fa-edit"></i>
+												</a>
+												
+											</td>
+										</tr>
+										#end
+
+									</tbody>
+								</table>
+								#pageNavigation($pageInfo "frm") #end
+							</div>
+							<!--END 查询结果-->
+						</div>
+					</div>
+					<!-- END PORTLET -->
+				</div>
+			</div>
+		</div>
+		<!-- END PROFILE CONTENT -->
+	</div>
+</div>

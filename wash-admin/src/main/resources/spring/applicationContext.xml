@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	<!-- 引入properties文件 -->
+	<!-- --><context:property-placeholder location="classpath:/resources_admin.properties" />
+    <bean id="washPropertyUtil" class="com.laiba.wash.core.util.WashPropertyUtil">
+		<property name="locations"><value>classpath:/resources_admin.properties</value></property>
+	</bean>
+	<!-- <context:property-placeholder location="file:/app/webContent/wash-admin/configs/wash_admin.properties" />
+    <bean id="washPropertyUtil" class="com.laiba.wash.core.util.washPropertyUtil">
+		<property name="locations"><value>file:/app/webContent/wash-admin/configs/wash_admin.properties</value></property>
+	</bean>  --> 
+	<!-- 引入service层配置 -->
+	<import resource="spring-service.xml"/>
+	
+	<!-- 自动扫描加入cache目录 -->
+	<context:component-scan base-package="com.laiba.wash.front.cache"/>
+
+	<import resource="spring-task.xml"/>
+</beans>

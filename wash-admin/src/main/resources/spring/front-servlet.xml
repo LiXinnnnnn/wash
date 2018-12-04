@@ -1,0 +1,100 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task.xsd ">
+
+
+	<!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="com.laiba.wash.front.controller" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+    
+	<!-- DefaultAnnotationHandlerMapping+AnnotationMethodHandlerAdapter -->
+	<mvc:annotation-driven/>
+	
+	<!-- velocity config -->
+	<bean id="velocityConfigurer"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath">
+			<value>view</value>
+		</property>
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+				<prop key="contentType">text/html;charset=UTF-8</prop>
+				<prop key="velocimacro.library">macro/macros.vm</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+		<property name="cache" value="false" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".vm" />
+		<property name="layoutUrl" value="/layout/common.vm" />
+		<property name="toolboxConfigLocation" value="/WEB-INF/toolbox.xml" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="requestContextAttribute" value="rc" />
+		<property name="dateToolAttribute">
+			<value>dateTool</value>
+		</property>
+		<property name="numberToolAttribute">
+			<value>numberTool</value>
+		</property>
+	</bean>
+    
+	<!-- 拦截器  -->
+    <mvc:interceptors>
+        <bean class="com.laiba.wash.front.interceptor.LoginInterceptor" >
+        	<property name="resource" value="classpath:access_allow.properties"></property>
+        </bean>
+        <bean class="com.laiba.wash.front.interceptor.NavigatorInterceptor"></bean>
+    </mvc:interceptors>
+    
+	<!-- 控制器异常处理 -->
+	<bean class="com.laiba.wash.front.interceptor.WashExceptionResolver">
+		<property name="view" value="/control/error"></property>
+	</bean>
+	
+	<!-- static file -->
+	<mvc:resources mapping="/static/**" location="/static/" cache-period="31556926"/>
+	
+	<!-- 支持上传文件 -->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    
+	<!-- 图片验证码 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">  
+         <property name="config">  
+             <bean class="com.google.code.kaptcha.util.Config">  
+                 <constructor-arg>  
+                     <props>  
+                         <prop key="kaptcha.border">no</prop>  
+                         <prop key="kaptcha.border.color"></prop>  
+                         <prop key="kaptcha.textproducer.font.color">red</prop>  
+                         <prop key="kaptcha.image.width">80</prop>  
+                         <prop key="kaptcha.image.height">35</prop>  
+                         <prop key="kaptcha.textproducer.font.size">30</prop>  
+                         <prop key="kaptcha.session.key">code</prop>  
+                         <prop key="kaptcha.textproducer.char.length">4</prop>  
+                         <prop key="kaptcha.noise.color">white</prop>  
+                         <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
+                     </props>  
+                 </constructor-arg>  
+             </bean>  
+         </property>  
+	</bean> 
+</beans> 

@@ -1,0 +1,54 @@
+
+.personal-information {
+    background-color: #4F4F57;
+    overflow: hidden;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.personal-picture {
+    float: left;
+    margin-left: 10%;
+}
+
+.personal-picture img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+.personal-name {
+    float: left;
+    width: 50%;
+    margin-left: 4%;
+}
+
+.personal-name h1 {
+    font-size: 15px;
+    margin-top: 16%;
+    color: #fff;
+}
+
+.personal-name p {
+    margin-top: 2%;
+    font-size: 14px;
+    color: #999;
+}
+.common-btn{
+	overflow: hidden;
+	margin: 2rem 0;
+}
+.common-btn input[type="button"]{
+	width: 90%;
+	margin: 0 5%;
+	height: 3rem;
+	color: #fff;
+	font-size: 16px;
+	text-align: center;
+	outline: none;
+	border: none;
+	background-color: #C2F0FC;
+    background-color: #4F4F57;
+
+	border-radius: 4px;
+}

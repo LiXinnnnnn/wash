@@ -1,0 +1,220 @@
+#macro(getRequestBase)
+#if($request.contextPath != "")$request.contextPath#end
+#end
+
+#macro(getJsPath $jsPath)#getRequestBase()/static/js/$jsPath?v=10#end
+#macro(getCssPath $cssPath)#getRequestBase()/static/css/$cssPath?v=10#end
+#macro(getImgPath $imgPath)#getRequestBase()/static/img/$imgPath?v=10#end
+#macro(getBasePath $staticPath)#getRequestBase()/static/$staticPath?v=10#end
+#macro(pageNavigation $pageInfo $formName )
+	#if($pageInfo)
+      <!--   <div class="page-num"> --> 
+     
+<div class="pagination-panel" align="right">
+            <span style="color:red;">$!recordWarn</span><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+    		共$!pageInfo.totalCount条记录&nbsp;&nbsp;
+		## 设置页码宽度，一边pageWidth个
+		#set($pageWidth = 5)
+		## 判断是否有上一页，当前页数大于1才有
+		<ul class="pagination" id="pgnumber" >
+    	#if($pageInfo.currentPage > 1)
+    		#set($previousPage=${pageInfo.currentPage} - 1)
+    		  <li> <a href="javascript:gotoPage('$formName', $previousPage);" style="float: none;margin-left: -5px;">&laquo;</a></li>
+    		 	#else
+    	<li class="disabled"><a href="javascript:;" style="float: none;margin-left: -5px;"> &laquo;</a></li>
+    	
+		#end
+		##计算向左快速翻页
+    	#if($pageInfo.currentPage > $pageWidth + 1)
+			#set($quickLeftPage = $pageInfo.currentPage - $pageWidth - 1)
+			 <li><a href="javascript:gotoPage('$formName', $quickLeftPage);" style="float: none;margin-left: -5px;">...</a></li>
+         #end
+		## 计算最左边的页码
+		#if($pageInfo.currentPage > $pageWidth)
+			#set ($leftPage=$pageInfo.currentPage - $pageWidth)
+		#else
+			#set ($leftPage = 1)
+		#end
+		## 计算最右边的页码
+		#if($pageInfo.currentPage + $pageWidth > $pageInfo.totalPage)
+			#set ($rightPage=$pageInfo.totalPage)
+		#else
+			#set ($rightPage = $pageInfo.currentPage + $pageWidth)
+		#end
+		#if($rightPage < 1)
+			#set ($rightPage = 1)
+		#end
+		## 显示页码
+		#foreach( $pageIndex in [$leftPage..$rightPage] )
+        	#if($pageIndex!=$pageInfo.currentPage)
+        	  <li><a href="javascript:gotoPage('$formName', $pageIndex);" style="float: none;margin-left: -5px;">$pageIndex</a></li>
+    
+        	#else
+        	
+        	 <li class="active"><a href="javascript:;" style="float: none;margin-left: -5px;">$pageIndex</a></li>
+    	
+        	#end
+		#end
+		##计算向右快速翻页
+        #if($pageInfo.totalPage > $rightPage)
+        	#set ($rightNextPage=$rightPage + $pageWidth + 1)
+        	 <li><a href="javascript:gotoPage('$formName', $rightNextPage);" style="float: none;margin-left: -5px;">...</a></li>
+        	#end
+		## 判断是否有下一页，当前页数小于总页数时才有
+    	#if($pageInfo.currentPage < $pageInfo.totalPage)
+    		#set($nextPage=${pageInfo.currentPage} + 1)
+    		 <li ><a href="javascript:gotoPage('$formName', $nextPage);" style="float: none;margin-left: -5px;">&raquo;</a></li>
+        		#else
+    	 <li class="disabled"><a href="javascript:;" style="float: none;margin-left: -5px;">&raquo;</a></li>
+    	
+        #end
+        </ul>
+        <span class="font_gray_normal" >共$pageInfo.totalPage页&nbsp;&nbsp;
+        	到第&nbsp;<input type="text" name="toPageInput"  id="toPageInput" size="2" class="pagination-panel-input form-control input-mini input-inline input-sm"
+				maxlenght="5" style="text-align: center; margin: 0 5px;" value="$pageInfo.currentPage" />&nbsp;页&nbsp;</span>
+        <span class="font_gray_normal" >每页&nbsp;
+        <input type="text" name="pageSizeInput" id="pageSizeInput"  size="2" class="pagination-panel-input form-control input-mini input-inline input-sm"
+				maxlenght="5" style="text-align: center; margin: 0 5px;" value="$pageInfo.pageSize" />&nbsp;条&nbsp;</span>
+    	<input type="button" id="sub" class="btn btn-default" onclick="javascript:gotoPage('$formName');" value="Go" />
+    	</div>
+   
+</div>
+	
+		<script>
+		/*处理回车事件*/
+		jQuery(document).ready(function() {
+			$(document).keydown(function(event) {
+				var myInput1 = document.getElementById('toPageInput');
+				var myInput2 = document.getElementById('pageSizeInput');
+				if (event.keyCode == 13 && myInput1 == document.activeElement) {
+					document.getElementById("sub").onclick();
+					return false;
+				}
+				if (event.keyCode == 13 && myInput2 == document.activeElement) {
+					document.getElementById("sub").onclick();
+					return false;
+				}
+				
+			});
+		});
+
+		function keydownEvent() {
+	         var e = window.event || arguments.callee.caller.arguments[0];
+	         if (e && e.keyCode == 13 ) {
+	        	 document.getElementById("sub").onclick();
+	         }
+	     }
+    		function gotoPage(formName,pageIndex){
+				if(typeof(pageIndex) == "undefined"){
+					pageIndex = document.getElementsByName("toPageInput")[0].value;
+				}
+    			var pageNum1 = pageIndex + "";
+				var pageNum = 1;
+            	var pattern =   /^([0-9])+$/;
+                var flag = pattern.test(pageNum1);
+            	if(flag){
+            		pageNum = pageNum1;
+            	}else{
+					showInfo("页码["+pageNum1+"]不正确",null);
+            		return;
+            	}
+            	var pageInputName = "currentPage";
+            	var pageInput = null;
+            	var form = document.getElementsByName(formName)[0];
+				//copy 每页条数到form中
+    			if(document.getElementsByName("pageSize").length != 0){
+            		pageInput = document.getElementsByName("pageSize")[0];
+                		pageInput.value = document.getElementsByName("pageSizeInput")[0].value;
+            	}else{
+            		pageInput = document.createElement("input");
+            		pageInput.type = "hidden";
+            	    pageInput.name = "pageSize";
+            	  //----------判断每页条数为---------
+            	  var pgSize=document.getElementsByName("pageSizeInput")[0].value;
+            		var pgSize1 = pgSize + "";
+                	var pattern =   /^([0-9])+$/;
+                    var flag1 = pattern.test(pgSize1);
+                	if(flag1){
+                	pageInput.value = document.getElementsByName("pageSizeInput")[0].value;
+            	    form.appendChild(pageInput);
+                	}else{
+    					showInfo("每页条数["+pgSize1+"]不正确",null);
+                		return;
+                	}
+            		//---------------
+            	   
+            	}
+            	//copy 页码到form中
+            	if(document.getElementsByName(pageInputName).length != 0){
+            		pageInput = document.getElementsByName(pageInputName)[0];
+            		pageInput.value = pageNum;
+            	}else{
+            		pageInput = document.createElement("input");
+            		pageInput.type = "hidden";
+            	    pageInput.name = "currentPage";
+            	    pageInput.value = pageNum;
+            	    form.appendChild(pageInput);
+            	}
+				form.submit();
+            }
+    	</script>
+	#else
+		<div class="pagenumber">
+			<!--没有分页对象-->
+		</div>
+	#end
+#end
+
+#macro(trackStrategy $tm $gm $strategyType $currGroupId)
+	#if($tm.getNode($gm).nodelist && $tm.getNode($gm).nodelist.size() > 0)
+		#foreach($nm in $tm.getNode($gm).nodelist)
+			<tr data-tt-id='$nm.gm.getId()' data-tt-parent-id='$nm.gm.getParentId()'>
+			<td>
+				#if($nm.gm.getId()==$currGroupId)
+				<span class='folder'  style="background-color:#e1e1e1;padding-top:1px;padding-bottom:1px" >
+				#else 
+				<span class='folder'>
+				#end
+				<a href="#getRequestBase()/strategy/list.htm?groupId=$nm.gm.getId()&strategyType=$strategyType">$nm.gm.getName()
+				</a></span>
+			</td>
+	  	    </tr>
+		    #if($strategyType == 1)
+				#foreach($sm in $nm.gm.getOsStrategyList())
+					<tr data-tt-id='$nm.gm.getId()-$sm.getId()' data-tt-parent-id='$nm.gm.getId()'>
+					    <td><span class='file'>$sm.getName()</span></td>
+				    </tr>
+				#end
+			#else
+				#foreach($sm in $nm.gm.getFirmStrategyList())
+					<tr data-tt-id='$nm.gm.getId()-$sm.getId()' data-tt-parent-id='$nm.gm.getId()'>
+					    <td><span class='file'>$sm.getName()</span></td>
+				    </tr>
+				#end
+			#end
+			#trackStrategy($tm,$nm.gm,$strategyType,$currGroupId)
+		#end
+	#end
+#end
+
+#macro(trackGroup $tm $gm $currGroupId)
+	#if($tm.getNode($gm).nodelist && $tm.getNode($gm).nodelist.size() > 0)
+		#foreach($nm in $tm.getNode($gm).nodelist)
+			<tr data-tt-id='$nm.gm.getId()' data-tt-parent-id='$nm.gm.getParentId()'>
+			    <td>
+			    #if($nm.gm.getId()==$currGroupId)
+			    <span class='folder'  style="background-color:#e1e1e1;padding-top:1px;padding-bottom:1px">
+			    #else 
+			    <span class='folder'>
+			    #end
+			    <a href="#getRequestBase()/group/groupList.htm?groupId=$nm.gm.getId()">$nm.gm.getName()
+			    </a>
+			    </span>
+			    </td>
+		    </tr>
+			#trackGroup($tm,$nm.gm,$currGroupId)
+		#end
+	#end
+#end
+
+

@@ -1,0 +1,54 @@
+<link rel="stylesheet" type="text/css" href="#getCssPath('menu.css')" />
+<script>
+	function onClickLabel(_this,url){
+		var divShow = $(_this).siblings("div");
+		if(0<divShow.length){
+			if(divShow.is(":hidden")){
+				$(_this).addClass("showLabel")
+				divShow.slideDown(300);
+			}else{
+				$(_this).removeClass("showLabel");
+				divShow.slideUp(300);
+			}
+		}else{
+			window.parent.location.href=url;
+		}
+	}
+
+	$(document).ready(function(){
+		$(".developers_middle_left_area_css li span").mouseover(function(){
+			$(this).animate({paddingLeft:"35px"},50);
+			$(this).addClass("moveOnThisPage");
+		})
+		$(".developers_middle_left_area_css li span").mouseout(function(){
+			$(this).animate({paddingLeft:"40px"},30);
+			$(this).removeClass("moveOnThisPage");
+		})
+	})
+</script>
+
+<div class="developers_middle_left_menu_css">
+	<ul>
+		<li>
+			<label onclick="onClickLabel(this,'${rc.contextPath}/developer/developerInfo.htm')" #if($menuIndex == 11) class="thisPage" #end>个人信息</label>
+		</li>
+		<li>
+			<label onclick="onClickLabel(this,'${rc.contextPath}/product/list.htm')" #if($menuIndex == 21) class="thisPage" #end>我的设备</label>
+		</li>
+		<li>
+			<label onclick="onClickLabel(this,'${rc.contextPath}/apply/applyList.htm')">设备共享</label>
+			<div #if(40>$menuIndex&&$menuIndex>30) class="left_menu_two_show_css" #else class="left_menu_two_hidden_css" #end>
+				<span onclick="onClickLabel(this,'${rc.contextPath}/apply/applyList.htm')" #if($menuIndex == 31) class="thisPage" #end>我申请的设备</span>
+				<span onclick="onClickLabel(this,'${rc.contextPath}/apply/approvalList.htm')" #if($menuIndex == 32) class="thisPage" #end>我共享的设备</span>
+				<span onclick="onClickLabel(this,'${rc.contextPath}/apply/applyRecord.htm')" #if($menuIndex == 33) class="thisPage" #end>申请记录</span>
+				<span onclick="onClickLabel(this,'${rc.contextPath}/apply/approvalRecord.htm')" #if($menuIndex == 34) class="thisPage" #end>审批记录</span>
+			</div>
+		</li>
+		<li>
+			<label onclick="onClickLabel(this,'${rc.contextPath}/key/keyList.htm')" #if($menuIndex == 41) class="thisPage" #end>秘钥管理</label>
+		</li>
+		<li>
+			<label onclick="onClickLabel(this,'${rc.contextPath}/event/eventList.htm')" #if($menuIndex == 51) class="thisPage" #end>事件管理</label>
+		</li>
+	</ul>
+</div>

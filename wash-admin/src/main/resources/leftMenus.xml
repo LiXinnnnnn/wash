@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus>
+	<menu id="order" name="订单管理" iconId="icon-list">
+		<menu name="订单列表" hrefUrl="/order/list.htm"   selectedUrl="/order/update.htm"/>
+	</menu>
+	<menu id="commodity" name="商品管理" iconId="icon-bag">
+		<menu name="商品列表" hrefUrl="/commodity/list.htm"   selectedUrl="/commodity/add.htm"/>
+	</menu>
+	<menu id="personCenter" name="个人中心" iconId="icon-user" >
+		
+		<menu name="修改资料" hrefUrl="/operator/updatePasswordPage.htm" />
+		
+	</menu>
+</menus>

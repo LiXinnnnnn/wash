@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- Appenders -->
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%-5p] %d{HH:mm:ss,SSS} %F:%M(%L)===> %m%n"/>
+		</layout>
+	</appender>
+	
+	<appender name="FILE-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="encoding" value="utf-8" />
+		<param name="File" value="/app/webContent/wash-api/logs/api-info.log" />
+		<param name="Threshold" value="INFO" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%-5p] %d{HH:mm:ss,SSS} %F:%M(%L)===> %m%n" />
+		</layout>
+	</appender>
+	
+	<appender name="MAIL"   class="com.laiba.wash.core.util.MyMailAppender">  
+		<!--  日志的错误级别 -->
+		<param name="threshold" value="error" />
+		<!-- 缓存文件大小 单位K，日志达到1K时发送Email -->
+		<param name="BufferSize" value="1" />
+		
+		<!-- QQ企业邮箱发送 -->
+		<param name="SMTPHost" value="smtp.exmail.qq.com" />
+		<param name="From" value="wxpt.monitor@koolpos.com" />
+		<param name="SMTPUsername" value="wxpt.monitor@koolpos.com" />
+		<param name="SMTPPassword" value="koolPOS802210" />
+		<param name="smtpProtocol" value="smtp" />
+		<param name="smtpPort" value="25" />
+
+        	<!-- 接收者	 -->		
+		<param name="Subject" value="wash-api-ErrorMessage" />
+		<param name="To" value="server@koolpos.com" />
+		
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+		   			value="%-d{yyyy-MM-dd HH:mm:ss.SSS} [%p]-[%c] %m%n" />
+		</layout>	  
+	</appender>
+
+	<!-- 异步发邮件，写日志 -->
+	<appender name="ASYNCOUT" class="org.apache.log4j.AsyncAppender">    
+	   <appender-ref ref="MAIL" />  
+ 	</appender>
+
+	<root>
+		<level value="info" />
+		<appender-ref ref="ASYNCOUT" />
+		<appender-ref ref="FILE-APPENDER" />   
+		<!-- <appender-ref ref="CONSOLE" /> -->
+	</root>
+	
+</log4j:configuration>

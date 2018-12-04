@@ -1,0 +1,23 @@
+<link href="#getCssPath('error.css')" rel="stylesheet" type="text/css" />
+<div class="error_img_area_css">
+	<div class="error_img_place_css">
+		<div class="error_img_area_text_up_css">
+			操作错误
+		</div>
+	</div>
+</div>
+<div class="error_middle_other_body_css">
+	<div class="error_middle_other_css">
+		<div class="error_message_area_css">
+			<div class="error_message_user_css">
+				尊敬的用户，您好！
+			</div>
+			<div class="error_message_error_css">
+				$error
+			</div>
+			<div class="error_message_show_css">
+				请妥善保存上述信息，再次感谢您的关注和使用!
+			</div>
+		</div>
+	</div>
+</div>

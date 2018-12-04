@@ -1,0 +1,57 @@
+.page-header.navbar {background-color:#364150;}
+.page-header.navbar .page-actions {margin:0; width:350px; height:75px;  background: url(../img/logotextcn.png) no-repeat 25px center; overflow:hidden;}
+.portlet.light > .portlet-title > .actions .btn-primary {color:#fff;}
+.portlet.light > .portlet-title > .actions .btn-primary > i {color:#fff;}
+table.table-striped th, table.table-striped td{text-align:center;}
+table.table-striped td .btn-default i{color:#333;}
+table.table-striped td .tooltips{margin-top:-5px; margin-bottom:-5px;}
+.portlet.light{min-height:550px;}
+.page-header-fixed .page-container{margin-bottom:33px;}
+@media (max-width: 767px){
+	.page-header.navbar .page-actions{display:none;}
+}
+.page-footer{position:fixed; left:0; bottom:0; padding-left:0; padding-right:0; width:100%; background-color:#fafafa; text-align:center;}
+.page-footer .page-footer-inner{width:100%;}
+.fttred {color: #f36a5a;}
+.help-block{margin-top:10px;}
+.tabbable-line.tabs-below > .tab-content{border-bottom:none;}
+.mb-download{font-size:16px; text-decoration:underline}
+.mb-download:hover{text-decoration:none; color:#26a69a;}
+/*BEGIN 查询框*/
+.table_sxcondition,.table_sxcondition>tbody>tr>td, .table_sxcondition>tbody>tr>th, .table_sxcondition>tfoot>tr>td, .table_sxcondition>tfoot>tr>th, .table_sxcondition>thead>tr>td, .table_sxcondition>thead>tr>th{border-color:#eee;}
+.table_sxcondition>tbody>tr>th{background-color:#eef1f2; text-align:right; padding-right:10px; line-height:34px; font-weight:500;}
+.table_sxcondition>tbody>tr>th.highlight{background-color:#dee2e3;}
+.table_sxcondition>tbody>tr>td{text-align:left; padding-left:10px;}
+.table_sxcondition>tbody>tr>td, .table_sxcondition>tbody>tr>th{border-style:dotted;}
+.table_sxcondition td .checkbox-inline{padding-left:0;}
+.input-group .form-control:first-child{border-top-right-radius: 0!important;  border-bottom-right-radius: 0!important;}
+.input-group .form-control:last-child{border-top-left-radius: 0!important;  border-bottom-left-radius: 0!important;}
+.input-group-addon:not(:first-child):not(:last-child){-webkit-border-radius: 0!important;  -moz-border-radius: 0!important;  -ms-border-radius: 0!important;  -o-border-radius: 0!important;  border-radius: 0!important;}
+.table_sxcondition td .cond-bx{margin-right:10px; padding-top:7px;}
+.table_sxcondition td .cond-bx a.label{padding:3px 15px;}
+.table_sxcondition .info{margin-top:10px; margin-bottom:0;}
+.table_sxcondition .shlogo{border:8px solid #ccc; border-bottom-width:10px; width:74px; height:74px;}
+.table_sxcondition .fttred{color:#f36a5a;}
+.table_sxcondition .shlogonotice{margin-bottom:0;}
+/*END 查询框*/
+/*BEGIN 自定义file控件*/
+.box{position:relative;}
+.box input.uploadFile{position:absolute; right:0; top:0; opacity:0;	filter:alpha(opacity=0); cursor:pointer; width:100%; height:34px; overflow: hidden;}
+.box .input-group-addon:not(:first-child):not(:last-child){-webkit-border-top-right-radius:4px!important; -moz-border-top-right-radius:4px!important; -ms-border-top-right-radius:4px!important; border-top-right-radius:4px!important; -webkit-border-bottom-right-radius:4px!important; -moz-border-bottom-right-radius:4px!important; -ms-border-bottom-right-radius:4px!important; border-bottom-right-radius:4px!important;}
+/*END 自定义file控件*/
+/*BEGIN TAB重定义*/
+.nav-tabs > li > a{font-size:16px;}
+.tab-title{position:relative;}
+.tab-title .actions{position:absolute; right:0; top:0;}
+.tab-title .actions .btn-primary i{color:#fff;}
+/*END TAB重定义*/
+/*BEGIN 弹框样式 */
+.modal-footer{text-align:center;}
+.notice .bootbox-body p{text-indent:10px;; font-size:16px;}
+.notice .bootbox-body li{color:#f36a5a; font-size:14px; line-height:25px; list-style:;}
+/*END 弹框样式 */
+
+/*12.8 新增 文件上传*/
+.fileUpload {position: relative;overflow: hidden; margin: 10px;}
+.fileUpload input.upload {position: absolute;top: 0;right: 0;margin: 0;padding: 0;font-size: 20px;cursor: pointer;opacity: 0;
+	filter: alpha(opacity=0);}

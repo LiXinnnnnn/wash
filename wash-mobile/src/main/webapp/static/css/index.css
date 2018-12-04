@@ -1,0 +1,143 @@
+.carousel {
+    width: 100%;
+    height: 30%;
+    position: relative;
+}
+
+.wrap{
+	background: #f2f2f2;
+    padding: 0.5rem;
+    overflow: hidden;
+}
+.carousel img {
+    width: 100%;
+    height: 100%;
+}
+.ul-carousel li img{
+	width: 100%;
+	height: 30%;
+}
+
+.banner {
+    position: relative;
+    overflow: auto;
+}
+
+.banner li {
+    list-style: none;
+}
+
+.banner ul li {
+    float: left;
+    cursor: pointer;
+}
+
+.banner ul li div {
+    position: absolute;
+    bottom: 8px;
+    z-index: 999;
+}
+
+.banner ul li p {
+    color: #fff;
+    position: relative;
+    text-indent: 6px;
+    width: 272px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dots {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 32px;
+    opacity: .8;
+}
+
+.dots li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 4px;
+    cursor: pointer;
+    -webkit-transition: background .5s, opacity .5s;
+    -moz-transition: background .5s, opacity .5s;
+    transition: background .5s, opacity .5s;
+    text-indent: -999em;
+    opacity: .4;
+    border: 2px solid #EB6100;
+    border-radius: 50%;
+}
+
+.carousel .active {
+    opacity: 1;
+    background-color: #EB6100;
+}
+
+ol.dots li {
+    float: right;
+}
+.title{
+}
+.title h1{
+    font-size: 16px;
+    color: #C9C9C9;
+    margin: 0 4px;
+    
+}
+.title h1 img{
+    vertical-align: middle;
+    margin-top: -2px;
+    margin-right: -4px;
+}
+.line{
+    width: 100%;
+    overflow: hidden;
+    margin-top: 0.5rem;
+    clear: both;
+    margin-bottom: 0.5rem;
+}
+.box{
+    width: 27%;
+    background-color: #fff;
+    padding: 2%;
+    border-radius: 5px;
+    float: left;
+    margin: 0 1%;
+}
+.box-img img{
+    width: 100%;
+}
+.box h1{
+    color: #999;
+    font-size: 12px;
+    text-indent: 2px;
+}
+.box h2{
+    color: #F70F34;
+}
+.box h2 i img{
+    width: 16px;
+    vertical-align: middle;
+    float: right;
+    margin-top: 2px;
+}
+.buy-btn input[type="button"]{
+    width: 80px;
+    height: 30px;
+    color: #fff;
+    background-color: #4F4F57;
+    border-radius: 4px;
+    outline: none;
+    text-align: center;
+    line-height: 30px;
+    border: none;
+    float: right;
+}
+.item{
+    overflow: hidden;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>徕巴-干洗服务管理系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="wot" name="description">
+<link rel="stylesheet" type="text/css" href="#getCssPath('jquery.treetable.css')" />
+<link rel="stylesheet" type="text/css" href="#getCssPath('jquery.treetable.theme.default.css')" />
+<script type="text/javascript" src="#getJsPath('jquery-2.0.3.min.js')"></script>
+<link rel="stylesheet" type="text/css" href="#getCssPath('cropper.css')" />
+<script type="text/javascript" src="#getJsPath('cropper.js')"></script>
+<script>var baseUrl = "${rc.contextPath}"</script>
+<script type="text/javascript" src="#getJsPath('common_util.js')"></script>
+ 
+ <link href="#getBasePath('assets/global/plugins/select2/select2.css')" rel="stylesheet" type="text/css"/>
+ <script src="#getBasePath('assets/global/plugins/select2/select2.js')"></script>
+  
+ <!-- 新页面引入 -->
+ <link href="#getBasePath('assets/global/plugins/pace/themes/pace-theme-flash.css')" rel="stylesheet" type="text/css"/>
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+ <link href="#getBasePath('assets/global/plugins/font-awesome/css/font-awesome.min.css')" rel="stylesheet" type="text/css"/>
+<link href="#getBasePath('assets/global/plugins/simple-line-icons/simple-line-icons.min.css')" rel="stylesheet" type="text/css"/>
+<link href="#getBasePath('assets/global/plugins/bootstrap/css/bootstrap.min.css')" rel="stylesheet" type="text/css"/>
+<!-- END GLOBAL MANDATORY STYLES -->
+<!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+<!-- END PAGE LEVEL PLUGIN STYLES -->
+<!-- BEGIN THEME STYLES -->
+<link href="#getBasePath('assets/global/css/components-rounded.css')" id="style_components" rel="stylesheet" type="text/css"/>
+<link href="#getBasePath('assets/global/css/plugins.css')" rel="stylesheet" type="text/css"/>
+<link href="#getBasePath('assets/admin/layout4/css/layout.css')" rel="stylesheet" type="text/css"/>
+<link href="#getBasePath('assets/admin/layout4/css/themes/light.css')" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="#getBasePath('assets/admin/layout4/css/custom.css')" rel="stylesheet" type="text/css"/>
+<link href="#getBasePath('assets/admin/pages/css/profile.css')" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="#getBasePath('assets/global/plugins/jstree/dist/themes/default/style.min.css')"/>
+
+<!-- END THEME STYLES -->
+<link rel="shortcut icon" href="#getImgPath('favicon.ico')"/>
+
+<!-- 表格固定宽度 -->
+<link href="#getCssPath('fixTableWidth.css')" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+        img {
+            max-width: 100%; 
+        }
+    </style>
+</head>
+ #parse("/control/alert_modal.vm")
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed-hide-logo  pace-done">
+
+		#parse("/control/header.vm") 
+		<div>
+		#parse("/control/pageBody.vm")
+	
+   			 <div class="common_body_css">
+    	
+    </div>
+    </div>
+	<div class="common_foot_css">
+		#parse("/control/bottom.vm")
+	</div>
+
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="#getBasePath('assets/global/plugins/respond.min.js')"></script>
+<script src="#getBasePath('assets/global/plugins/excanvas.min.js')"></script> 
+<![endif]-->
+<script src="#getBasePath('assets/global/plugins/jquery-migrate.min.js')" type="text/javascript"></script>
+<script src="#getBasePath('assets/global/plugins/jquery-ui/jquery-ui.min.js')" type="text/javascript"></script>
+<script src="#getBasePath('assets/global/plugins/bootstrap/js/bootstrap.min.js')" type="text/javascript"></script>
+<script src="#getBasePath('assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js')" type="text/javascript"></script>
+<script src="#getBasePath('assets/global/plugins/jquery-slimscroll/jwashry.slimscroll.mwashjs')" type="text/javascript"></script>
+<script src="#getBasePath('assets/global/plugins/jquery.blockui.min.js')" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="#getBasePath('assets/global/scripts/metronic.js')" type="text/javascript"></script>
+<script src="#getBasePath('assets/admin/layout4/scripts/layout.js')" type="text/javascript"></script>
+<script src="#getBasePath('assets/global/plugins/jquery-validation/js/jquery.validate.min.js')" type="text/javascript"></script>
+<script src="#getBasePath('assets/global/plugins/jstree/dist/jstree.min.js')"></script>
+<script src="#getBasePath('assets/admin/pages/scripts/ui-tree.js')"></script>
+<script type="text/javascript" src="#getJsPath('jquery.treetable.js')"></script> 
+<script type="text/javascript" src="#getJsPath('components-dropdowns.js')"></script> 
+<script type="text/javascript" src="#getJsPath('jquery.form.js')"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<!--日历控件 -->
+<script src="#getBasePath('datepicker/WdatePicker.js')" type="text/javascript"></script>
+<!--验证格式js  -->
+<script type="text/javascript" src="#getJsPath('validate.expand.js')"></script>
+
+<script>
+function allreset(){
+    $(".form-control:input").each(function(){
+		$(this).val('');
+	});
+	$("select").each(function(){
+		$(this).val('-1');
+	});
+}
+
+jQuery(document).ready(function() {    
+   Metronic.init(); // init metronic core componets
+   Layout.init(); // init layout
+   UITree.init();
+});
+</script>
+
+</body>
+</html>

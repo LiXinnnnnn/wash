@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.laiba.wash.core.dao.mapper.ShopCarMapperExtra" >
+
+	<resultMap id="shopCarCommodityMap" type="com.laiba.wash.core.model.ShopCarCommodity" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="commodity_id" property="commodityId" jdbcType="INTEGER" />
+    <result column="number" property="number" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="shopCarCommodity" resultMap="shopCarCommodityMap" parameterType="java.util.Map">
+  SELECT shop_car.*,commodity.*
+	from shop_car
+	LEFT JOIN commodity on shop_car.commodity_id = commodity.id
+	where shop_car.`status` = 1
+	and shop_car.user_id = #{userId}
+	<if test="idList != null">
+	and shop_car.id in
+     <foreach collection="idList" item="id" open="(" close=")" separator="," >
+       #{id}
+     </foreach>
+	</if>
+  </select>
+  
+  <select id="orderCommodity" resultMap="shopCarCommodityMap" parameterType="java.lang.String">
+  SELECT order_commodity.* ,commodity.img,order_commodity.commodity_price price,commodity.unit,
+  order_commodity.commodity_name name
+	from order_commodity 
+	LEFT JOIN commodity on order_commodity.commodity_id = commodity.id
+	where 1=1
+	<if test="orderNo != ''">
+	and order_commodity.order_no = #{orderNo}
+	</if>
+  </select>
+ 
+</mapper>

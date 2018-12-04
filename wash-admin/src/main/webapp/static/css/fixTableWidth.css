@@ -1,0 +1,16 @@
+table tbody tr td {
+	word-break:break-all;
+}
+
+
+.nowrapdiv table tbody tr td {
+     white-space: nowrap;
+}
+
+.nowrapdiv table thead tr th {
+     white-space: nowrap;
+}
+
+.nowrapdiv {
+	overflow-x:auto
+}
